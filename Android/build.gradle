@@ -22,7 +22,7 @@ dependencies {
 
 android {
     compileSdkVersion 21
-    buildToolsVersion "21.1.1"
+    buildToolsVersion '21.1.1'
 
     defaultConfig {
         applicationId 'com.playuav.android'
@@ -66,17 +66,11 @@ android {
     }
 
     signingConfigs {
-        release {
-            storeFile getAppKeystoreFile()
-            storePassword getAppKeystorePassword()
-            keyAlias getAppKey()
-            keyPassword getAppKeyPassword()
-        }
         config {
-            keyAlias 'michaelkey'
-            keyPassword 'michaelpwd'
-            storeFile file('C:\\Users\\Esmidth\\Documents\\Github\\droidplanner-master\\Key\\Esmidth.crt')
-            storePassword 'michaelpwd2'
+            keyAlias 'esmidthkey'
+            keyPassword 'njsm952009.'
+            storeFile file('C:\\Users\\Esmidth\\Documents\\Github\\DroidPlannerMod\\Key1')
+            storePassword 'njsm952009'
         }
     }
 
