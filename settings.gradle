@@ -1,6 +1,0 @@
-//Android projects
-include ':Android'
-
-//Library projects
-include ':Libraries:PebbleKit'
-

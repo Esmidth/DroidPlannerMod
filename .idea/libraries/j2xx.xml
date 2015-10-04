@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="j2xx">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/Android/libs/j2xx.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
