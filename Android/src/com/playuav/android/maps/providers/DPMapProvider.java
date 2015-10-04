@@ -2,9 +2,10 @@ package com.playuav.android.maps.providers;
 
 import com.playuav.android.maps.DPMap;
 //import com.playuav.android.maps.providers.google_map.GoogleMapFragment;
+import com.playuav.android.maps.providers.amap.AMapFragment;
 import com.playuav.android.maps.providers.google_map.GoogleMapProviderPreferences;
-//import com.playuav.android.maps.providers.amap.AMapFragment;
-import com.playuav.android.maps.providers.BaiduMap.BaiduMapFragment;
+import com.playuav.android.maps.providers.amap.AMapFragment;
+//import com.playuav.android.maps.providers.BaiduMap.BaiduMapFragment;
 /**
  * Contains a listing of the various map providers supported, and implemented in
  * DroidPlanner.
@@ -25,7 +26,7 @@ public enum DPMapProvider {
 		}
 	},*/
 
-  /*  高德地图 {
+    高德地图 {
         @Override
         public DPMap getMapFragment() {
             return new AMapFragment();
@@ -35,8 +36,8 @@ public enum DPMapProvider {
         public MapProviderPreferences getMapProviderPreferences() {
             return new GoogleMapProviderPreferences();
         }
-    },*/
-
+    };
+	/*
     百度地图{
         @Override
         public DPMap getMapFragment() {
@@ -48,7 +49,7 @@ public enum DPMapProvider {
             return new GoogleMapProviderPreferences();
         }
     };
-
+	*/
 
 
 	/**
@@ -83,5 +84,5 @@ public enum DPMapProvider {
 	/**
 	 * By default, Google Map is the map provider.
 	 */
-	public static final DPMapProvider DEFAULT_MAP_PROVIDER = 百度地图;
+	public static final DPMapProvider DEFAULT_MAP_PROVIDER = 高德地图;
 }

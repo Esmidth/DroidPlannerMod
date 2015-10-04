@@ -5,7 +5,7 @@ import org.droidplanner.core.helpers.geoTools.GeoTools;
 public class Coord2D {
 	private double latitude; // aka x
 	private double longitude; // aka y
-
+	//Coord-Coordinate n.坐标
 	public Coord2D(double lat, double lon) {
 		set(lat, lon);
 	}

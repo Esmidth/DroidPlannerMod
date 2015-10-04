@@ -39,7 +39,7 @@ public class Camera extends DroneVariable {
 		return camera;
 	}
 
-	public Footprint getCurrentFieldOfView() {
+	public Footprint getCurrentFieldOfView() { //获取相机拍照的位置和飞行器的状态
 		double altitude = myDrone.getAltitude().getAltitude();
 		Coord2D position = myDrone.getGps().getPosition();
 		//double pitch = myDrone.getOrientation().getPitch() - gimbal_pitch;

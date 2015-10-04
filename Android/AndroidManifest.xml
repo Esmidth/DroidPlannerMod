@@ -64,9 +64,11 @@
         android:theme="@style/CustomActionBarTheme"
         android:windowSoftInputMode="adjustPan"
         tools:replace="android:label">
-
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="eEVUrzd13mokk0zLkmPinWcX"/>
         <!-- You must insert your own Google Maps for Android API v2 key in here. -->
-        
+
         <activity
             android:name=".activities.FlightActivity"
             android:launchMode="singleTask"

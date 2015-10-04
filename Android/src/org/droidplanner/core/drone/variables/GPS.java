@@ -11,7 +11,7 @@ public class GPS extends DroneVariable {
 
 	private double gps_eph = -1;
 	private int satCount = -1;
-	private int fixType = -1;
+	private int fixType = -1; //GPS修正类型?
 	private Coord2D position;
 
 	public GPS(Drone myDrone) {
