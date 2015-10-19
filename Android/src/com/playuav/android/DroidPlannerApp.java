@@ -5,6 +5,10 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.content.LocalBroadcastManager;
@@ -12,6 +16,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.baidu.mapapi.SDKInitializer;
 import com.o3dr.android.client.Drone;
 import com.o3dr.android.client.ServiceManager;
 import com.o3dr.android.client.interfaces.DroneListener;
@@ -22,16 +27,14 @@ import com.o3dr.services.android.lib.drone.connection.ConnectionResult;
 import com.o3dr.services.android.lib.drone.connection.ConnectionType;
 import com.o3dr.services.android.lib.drone.connection.DroneSharePrefs;
 import com.o3dr.services.android.lib.drone.connection.StreamRates;
-
-import com.baidu.mapapi.SDKInitializer;
-
-
 import com.playuav.android.activities.helpers.BluetoothDevicesActivity;
 import com.playuav.android.notifications.NotificationHandler;
 import com.playuav.android.proxy.mission.MissionProxy;
 import com.playuav.android.utils.analytics.GAUtils;
 import com.playuav.android.utils.file.IO.ExceptionWriter;
 import com.playuav.android.utils.prefs.DroidPlannerPrefs;
+
+import org.droidplanner.core.helpers.coordinates.Coord2D;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -341,5 +344,56 @@ public class DroidPlannerApp extends Application implements DroneListener, Servi
 
         if(!TextUtils.isEmpty(errorMsg))
             Log.e(TAG, errorMsg);
+    }
+    private void getLocation() {
+        LocationListener locationListener = new LocationListener(){
+            //位置发生改变时调用
+            @Override
+            public void onLocationChanged(Location location) {
+                Log.d("Location", "onLocationChanged");
+            }
+
+            //provider失效时调用
+            @Override
+            public void onProviderDisabled(String provider) {
+                Log.d("Location", "onProviderDisabled");
+            }
+
+            //provider启用时调用
+            @Override
+            public void onProviderEnabled(String provider) {
+                Log.d("Location", "onProviderEnabled");
+            }
+
+            //状态改变时调用
+            @Override
+            public void onStatusChanged(String provider, int status, Bundle extras) {
+                Log.d("Location", "onStatusChanged");
+            }
+        };
+        LocationManager locationManger;
+        String serviceName = Context.LOCATION_SERVICE;
+        locationManger = (LocationManager) this.getSystemService(serviceName);
+        Criteria criteria = new Criteria();
+        criteria.setAccuracy(Criteria.ACCURACY_FINE);
+        criteria.setAltitudeRequired(false);
+        criteria.setBearingRequired(false);
+        criteria.setCostAllowed(true);
+        criteria.setPowerRequirement(Criteria.POWER_LOW);
+        /*
+        String provider = locationManger.getBestProvider(criteria, true); // 获取GPS信息
+        Location location = locationManger.getLastKnownLocation(provider);// 通过GPS获取位置
+        updateToNewLocation(location);
+        locationManger.requestLocationUpdates(provider,100*1000,500,locationListener);
+        */
+        refresh(locationManger,criteria,locationListener);
+    }
+    public Coord2D refresh(LocationManager locationManger,Criteria criteria,LocationListener locationListener)
+    {
+        String provider = locationManger.getBestProvider(criteria, true); // 获取GPS信息
+        Location location = locationManger.getLastKnownLocation(provider);// 通过GPS获取位置
+        Coord2D coord2D = new Coord2D(location.getLatitude(),location.getLongitude());
+        locationManger.requestLocationUpdates(provider, 100 * 1000, 500, locationListener);
+        return coord2D;
     }
 }

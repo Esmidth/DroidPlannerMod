@@ -13,6 +13,7 @@ import java.lang.ref.WeakReference;
 /**
  * Created by fhuya on 11/3/14.
  */
+//DP ?= Dynamic Programming
 final class DPServices extends IDroidPlannerServices.Stub {
 
     private final static String TAG = DPServices.class.getSimpleName();
